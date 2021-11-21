@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node server/index.js",
+    "seed": "babel-node server/seeders/seeds.js",
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./app.js -s",
+    "build-babel": "babel -d ./build ./server/index.js -s",
     "build": "npm run clean && npm run build-babel"
   },
   "dependencies": {

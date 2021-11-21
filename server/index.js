@@ -1,13 +1,12 @@
 import express, {urlencoded, json} from "express";
 import cors from 'cors';
-import DB from './models/database';
+// require("./models/database").default;
 
 
 const app = express();
 const Port = process.env.PORT ||  8000;
 import "dotenv/config";
 
-DB._connect;
  
 app.use(cors());
 app.use(urlencoded({ extended: true }));

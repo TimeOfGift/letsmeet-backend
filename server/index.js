@@ -1,7 +1,9 @@
 import express, {urlencoded, json} from "express";
 import cors from 'cors';
-// require("./models/database").default;
+import "dotenv/config";
+require("./models/database").default;
 import apiRoute from './routes/';
+
 
 
 const app = express();

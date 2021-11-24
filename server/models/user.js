@@ -13,7 +13,6 @@ const UserSchema = new Schema({
 
   username: {
     type: String,
-    unique: true,
   },
   password: {
     type: String,
@@ -24,13 +23,6 @@ const UserSchema = new Schema({
 
   { timestamps: true }
 );
-// to change mongodb _id to id
-UserSchema.method("toJSON",  () => {
-  const { __v, _id, ...object } = this.toObject();
-  object.id = _id;
-  console.log(object)
-  return object;
-});
 
 export default model('User', UserSchema);
 

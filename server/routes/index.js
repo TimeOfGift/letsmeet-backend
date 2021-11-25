@@ -6,8 +6,9 @@ import { signUpValidator } from '../middlewares/userValidation';
 
 const router = express.Router();
 
-router.route('/auth/signup')
-  .post(signUpValidator, signup);
+router.route('/auth/signup').post(signUpValidator, signup);
+router.route('/auth/signin').post(signUpValidator, signup);
+
 
 
 router.route('/interest')

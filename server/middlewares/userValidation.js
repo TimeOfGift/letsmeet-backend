@@ -32,11 +32,11 @@ export const signUpValidator = (req, res, next) => {
   } else { errors.first_name = 'last_name  is required' }
 
 
-  if (!validator.isEmpty(username)) {
-    if (!validator.isLength(username, { min: 2, max: 15 })) {
-      errors.username = 'username must be between 2 to 100 characters';
-    }
-  } else { errors.username = 'username  is required'; }
+  // if (!validator.isEmpty(username)) {
+  //   if (!validator.isLength(username, { min: 2, max: 15 })) {
+  //     errors.username = 'username must be between 2 to 100 characters';
+  //   }
+  // } else { errors.username = 'username  is required'; }
 
   if (!validator.isEmpty(email)) {
     if (!validator.isEmail(email)) {

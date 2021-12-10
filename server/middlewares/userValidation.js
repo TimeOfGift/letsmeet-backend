@@ -6,8 +6,7 @@ export const signUpValidator = (req, res, next) => {
     first_name, last_name, username, email, password
   } = req.body;
   const errors = {};
-  if (first_name === undefined || username === undefined
-    || email === undefined || password === undefined || last_name === undefined) {
+  if (first_name === undefined || email === undefined || password === undefined || last_name === undefined) {
     return res.status(400)
       .json({
         message: 'All or some of the field is/are undefined'
@@ -32,11 +31,11 @@ export const signUpValidator = (req, res, next) => {
   } else { errors.first_name = 'last_name  is required' }
 
 
-  if (!validator.isEmpty(username)) {
-    if (!validator.isLength(username, { min: 2, max: 15 })) {
-      errors.username = 'username must be between 2 to 100 characters';
-    }
-  } else { errors.username = 'username  is required'; }
+  // if (!validator.isEmpty(username)) {
+  //   if (!validator.isLength(username, { min: 2, max: 15 })) {
+  //     errors.username = 'username must be between 2 to 100 characters';
+  //   }
+  // } else { errors.username = 'username  is required'; }
 
   if (!validator.isEmpty(email)) {
     if (!validator.isEmail(email)) {

@@ -1,7 +1,7 @@
 import { connect, disconnect} from "mongoose";
 import "dotenv/config";
 
-const mongoURL = process.env.MONGO_URL;
+const mongoURL = process.env.MONGO_URL_ONLINE;
 
 class Database {
   constructor() {

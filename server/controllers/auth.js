@@ -74,7 +74,7 @@ export const signin = (req, res) => {
     return res.status(422)
     .json({
       status: 'Failed',
-      message: 'Invalid Email or Passworddddd',
+      message: 'Invalid Email or Password',
       user
     });
   }).catch(err => res.status(500).json({ status: 'Failed', message: err.message }));

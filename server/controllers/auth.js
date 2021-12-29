@@ -48,6 +48,12 @@ export const signup = (req, res)=> {
 export const signin = (req, res) => {
   const { email, password, username } = req.body;
   return User.findOne({email}).then(user => {
+    if(!user){
+        return res.json({
+          status: 'Failed',
+          message: 'Invalid Email or Password'
+        });
+    }
     const checkPassword = bcrypt.compareSync(password, user.password)
     if(checkPassword){
       const payload = { email: user.email }

@@ -58,9 +58,16 @@ export const signInValidator = (req, res, next) => {
   const { username, password, email } = req.body;
   const errors = {};
 
-const identifier = username || email;
-  if (validator.isEmpty(identifier)) {
-    errors.username = 'username or mail  is required'
+// const identifier = username || email;
+  if (password === undefined || email === undefined) {
+    return res.status(400)
+      .json({
+        status: 'error',
+        message:'All or some of the field is/are undefined'
+      });
+  }
+  if (validator.isEmpty(email)) {
+    errors.email = 'email is required'
   } 
 
   if (!validator.isEmpty(password)) {

@@ -15,16 +15,10 @@ export const signup = (req, res)=> {
     password,
     username
   } = req.body;
-  
+
   const hashedPassword = bcrypt.hashSync(password, 10);
    
-  return User.findOne({ email }).then(registeredUser => {
-    if (registeredUser){
-      return res.json({
-        status: 'error',
-        message: 'User already signup'
-      })
-    }
+   User.findOne({ email }).then(registeredUser => {
     User.create({ first_name, last_name, email, password:hashedPassword, username }).then(user => {
       res.json({
         status: 'success',
@@ -42,27 +36,19 @@ export const signup = (req, res)=> {
       status: 'error',
       message: e,
     })
-
   });
 }
 
 // MONGO_URL=mongodb://localhost:27017/letsmeet
 
-export const signin = (req, res) => {
-  const { email, password } = req.body;
-  return User.findOne({email}).then(user => {
-    if(!user){
-        return res.json({
-          status: 'Failed',
-          message: 'Invalid Email or Password'
-        });
-    }
-    const checkPassword = bcrypt.compareSync(password, user.password)
+export const signIn = async(req, res) => {
+ await User.findOne({email}).then(user => {
+    const checkPassword = bcrypt.compareSync(req.body.password, req.user.password);
     if(checkPassword){
       const payload = { email: user.email }
       const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 60 * 60 * 10 }); // Expires in 10 hours
       req.token = token;
-       res.json({
+      return res.json({
         status: 'Success',
         message: 'successfull login',
         firstname: user.first_name,
@@ -75,8 +61,7 @@ export const signin = (req, res) => {
     .json({
       status: 'Failed',
       message: 'Invalid Email or Password',
-      user
     });
-  }).catch(err => res.status(500).json({ status: 'Failed', message: err.message }));
+  }).catch(err => res.status(500).json({ status: 'Failed', message:`error signing in user ${err.message}` }));
 }
 

@@ -1,4 +1,5 @@
-import DB from "../models/database";
+// import DB from "../models/database.js";
+import DB from '../models/database.js'
 import User from '../models/user';
 import Interest from '../models/interest';
 
@@ -117,7 +118,9 @@ User.collection.drop();
 Interest.collection.drop();
 
 
-Promise.all([User.create(userData), Interest.create(interestData)]).then(() => {
+Promise.all([User.create(userData), 
+  Interest.create(interestData)])
+  .then(() => {
   DB._disconnect();
 });
 

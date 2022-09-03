@@ -10,22 +10,20 @@ const authToken = (req, res, next) => {
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
         if (err) {
-          res.status(401);
-          res.json({
+          return res.json({
             status: 'Failed',
             message: 'Authentication failed. Token is either invalid or expired'
-          });
+          }).status(401);
         } else {
           req.decoded = decoded;
-          next();
+         return next();
         }
       });
     } else {
-      res.status(403);
-      res.json({
+      return res.json({
         status: 'Failed',
         message: 'wrong token. provide  a valid token'
-      });
+      }).status(403);
     }
   };
 

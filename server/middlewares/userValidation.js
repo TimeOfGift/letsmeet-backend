@@ -84,3 +84,181 @@ export const signInValidator = (req, res, next) => {
   next();
 }
 
+export const eventValidator = (req, res, next) => {
+  const {
+    title, description, imageUrl, location,
+    startDate, startTime, endDate, endTime, eventTypeId, number0fAttendees, price,
+    active, webinarUrl, webinarId
+  } = req.body;
+  const errors = {};
+  if (title === undefined || description === undefined || imageUrl === undefined || location === undefined ||
+    startDate === undefined || startTime === undefined || endDate === undefined || endTime === undefined || eventTypeId === undefined ||
+    number0fAttendees === undefined || price === undefined || active == undefined || webinarUrl === undefined || webinarId === undefined) {
+    return res.json({
+      message: 'All or some of the field is/are missing'
+    }).status(422)
+  }
+
+  if (!validator.isEmpty(title)) {
+    if (!validator.isLength(title, { min: 5, max: 50 })) {
+      errors.username = 'title must be between  to 50 characters';
+    }
+  } else { errors.username = 'title  is required'; }
+
+  if (!validator.isEmpty(description)) {
+    if (!validator.isLength(description, { min: 25, max: 250 })) {
+      errors.description = 'description must be between 25 to 100 characters';
+    }
+  } else { errors.description = 'description  is required'; }
+
+  if (!validator.isEmpty(imageUrl)) {
+    if (!validator.isLength(imageUrl, { protocols: ['http', 'https', 'ftp'] })) {
+      errors.imageUrl = 'imageUrl  must be of type string url';
+    }
+  } else { errors.imageUrl = 'imageUrl  is required'; }
+
+  if (!validator.isEmpty(location)) {
+    if (!validator.isLength(location, { min: 3, max: 50 })) {
+      errors.location = 'location must be between 5 to 50 characters';
+    }
+  } else { errors.location = 'location  is required'; }
+
+  if (!validator.isEmpty(startDate)) {
+    if (!validator.isLength(startDate, { min: 5, max: 25 })) {
+      errors.startDate = 'startDate must be between 5 to 25 characters';
+    }
+  } else { errors.startDate = 'startDate  is required'; }
+
+  if (!validator.isEmpty(startTime)) {
+    if (!validator.isLength(startTime, { min: 5, max: 25 })) {
+      errors.startTime = 'startTime must be between 5 to 25 characters';
+    }
+  } else { errors.startTime = 'startTime  is required'; }
+
+  if (!validator.isEmpty(endDate)) {
+    if (!validator.isLength(endDate, { min: 5, max: 25 })) {
+      errors.endDate = 'endDate  must be between 5 to 25 characters';
+    }
+  } else { errors.endDate = 'endDate  is required'; }
+
+  if (!validator.isEmpty(endTime)) {
+    if (!validator.isLength(endTime, { min: 5, max: 25 })) {
+      errors.endTime = 'endTime  must be between 5 to 25 characters';
+    }
+  } else { errors.endTime = 'endTime  is required'; }
+
+  if (!validator.isEmpty(eventTypeId)) {
+    if (!validator.isLength(eventTypeId, { min: 1, max: 25 })) {
+      errors.eventTypeId = 'eventTypeId  must be between 1 to 25 characters';
+    }
+  } else { errors.eventTypeId = 'eventTypeId  is required'; }
+
+  if (!validator.isEmpty(number0fAttendees)) {
+    if (!validator.isNumeric(number0fAttendees, {no_symbols: true})) {
+      errors.number0fAttendees = 'number0fAttendees  must be of type number';
+    }
+  } else { errors.number0fAttendees = 'number0fAttendees  is required'; }
+
+  if (!validator.isEmpty(price)) {
+    if (!validator.isFloat(price, { min: 0.00, max: 1000000.00 })) {
+      errors.price = 'price  must be of type number';
+    }
+  } else { errors.price = 'price  is required'; }
+
+  if (!validator.isEmpty(active)) {
+    if (!validator.isBoolean(active, { loose: false })) {
+      errors.active = 'active  must be of type boolean';
+    }
+  } else { errors.active = 'active  is required'; }
+
+  if (!validator.isEmpty(webinarUrl)) {
+    if (!validator.isLength(webinarUrl, {  min: 5, max: 250 })) {
+      errors.webinarUrl = 'webinarUrl must be between 5 to 250 characters';
+    }
+  } else { errors.webinarUrl = 'webinarUrl  is required'; }
+
+  if (!validator.isEmpty(webinarId)) {
+    if (!validator.isLength(webinarId, { min: 5, max: 50 })) {
+      errors.webinarId = 'webinarId must be between 5 to 50 characters';
+    }
+  } else { errors.webinarId = 'webinarId  is required'; }
+
+  if (Object.keys(errors).length !== 0) {
+    return res.status(400).json({ errors });
+  }
+  next();
+};
+
+export const updateEventValidator = (req, res, next) => {
+  const {
+    title, description, imageUrl, location, 
+    number0fAttendees, price, active, webinarUrl, webinarId
+  } = req.body;
+  const errors = {};
+  if (title === undefined || description === undefined || imageUrl === undefined || 
+    location === undefined ||number0fAttendees === undefined || price === undefined || 
+    active == undefined || webinarUrl === undefined || webinarId === undefined) {
+    return res.json({
+      message: 'All or some of the field is/are missing'
+    }).status(422)
+  }
+
+  if (!validator.isEmpty(title)) {
+    if (!validator.isLength(title, { min: 5, max: 50 })) {
+      errors.username = 'title must be between  to 50 characters';
+    }
+  } else { errors.username = 'title  is required'; }
+
+  if (!validator.isEmpty(description)) {
+    if (!validator.isLength(description, { min: 25, max: 250 })) {
+      errors.description = 'description must be between 25 to 100 characters';
+    }
+  } else { errors.description = 'description  is required'; }
+
+  if (!validator.isEmpty(imageUrl)) {
+    if (!validator.isLength(imageUrl, { protocols: ['http', 'https', 'ftp'] })) {
+      errors.imageUrl = 'imageUrl  must be of type string url';
+    }
+  } else { errors.imageUrl = 'imageUrl  is required'; }
+
+  if (!validator.isEmpty(location)) {
+    if (!validator.isLength(location, { min: 3, max: 50 })) {
+      errors.location = 'location must be between 5 to 50 characters';
+    }
+  } else { errors.location = 'location  is required'; }
+
+  if (!validator.isEmpty(number0fAttendees)) {
+    if (!validator.isNumeric(number0fAttendees, {no_symbols: true})) {
+      errors.number0fAttendees = 'number0fAttendees  must be of type number';
+    }
+  } else { errors.number0fAttendees = 'number0fAttendees  is required'; }
+
+  if (!validator.isEmpty(price)) {
+    if (!validator.isFloat(price, { min: 0.00, max: 1000000.00 })) {
+      errors.price = 'price  must be of type number';
+    }
+  } else { errors.price = 'price  is required'; }
+
+  if (!validator.isEmpty(active)) {
+    if (!validator.isBoolean(active, { loose: false })) {
+      errors.active = 'active  must be of type boolean';
+    }
+  } else { errors.active = 'price  is required'; }
+
+  if (!validator.isEmpty(webinarUrl)) {
+    if (!validator.isLength(webinarUrl, {  min: 5, max: 250 })) {
+      errors.webinarUrl = 'webinarUrl must be between 5 to 250 characters';
+    }
+  } else { errors.webinarUrl = 'webinarUrl  is required'; }
+
+  if (!validator.isEmpty(webinarId)) {
+    if (!validator.isLength(webinarId, { min: 5, max: 50 })) {
+      errors.webinarId = 'webinarId must be between 5 to 50 characters';
+    }
+  } else { errors.webinarId = 'webinarId  is required'; }
+
+  if (Object.keys(errors).length !== 0) {
+    return res.status(400).json({ errors });
+  }
+  next();
+};

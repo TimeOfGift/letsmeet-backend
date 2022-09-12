@@ -7,36 +7,13 @@ import "dotenv/config";
 
 const userData = [
   {
-  first_name: 'sMoris',
-  last_name: 'obogo',
-  email: 'obffffff@jjjjj.com',
-  password: 'ooooooooo',
-  username: 'wqxcffvgg'
-}, 
-
-  {
-    first_name: 'sMoris',
-    last_name: 'obogo',
-    email: 'obffffff@jjjjj.com',
-    password: 'ooooooooo',
-    username: 'wqxcffvgg'
-  }, 
-  {
-    first_name: 'sMoris',
-    last_name: 'obogo',
-    email: 'obffffff@jjjjj.com',
-    password: 'ooooooooo',
-    username: 'wqxcffvgg'
-  }, 
-  {
-    first_name: 'sMoris',
-    last_name: 'obogo',
-    email: 'obffffff@jjjjj.com',
-    password: 'ooooooooo',
-    username: 'wqxcffvgg'
-  }, 
+  first_name: 'admin',
+  last_name: 'admin',
+  email: 'admin1@eventmeet.com',
+  password: '$2b$10$F4iopNtOizZVfgvDOUa4R.7Um5R0os7XVYKgw.GQJUr.WQNRARePW', //aDmin@1password
+  username: 'admin1'
+}
 ]
-
 
 const interestData =[
   {

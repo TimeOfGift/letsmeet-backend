@@ -2,8 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import User from '../models/user';
-
-
+import { uuid } from 'uuidv4';
 env.config();
 
 
@@ -17,12 +16,11 @@ export const signup = (req, res) => {
   } = req.body;
 
   const hashedPassword = bcrypt.hashSync(password, 10);
-
   User.findOne({ email }).then(registeredUser => {
-    User.create({ first_name, last_name, email, password: hashedPassword, username }).then(user => {
-      res.json({
+    User.create({ user_id: `user-$${uuid()}`, first_name, last_name, email, password: hashedPassword.trim(), username }).then(user => {
+      return res.json({
         status: 'success',
-        message: 'Successfully create account with Eventmeet',
+        message: 'Successfully create account with Event-meet',
         data: user
       }).status(201)
     }).catch(e => {

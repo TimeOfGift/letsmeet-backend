@@ -29,7 +29,7 @@ router.route('/user/interest').post(
   createInterest
 );
 
-router.route('/user/interest').get(
+router.route('/user/interest/').get(
   authToken,
   getUser('authenticate'),
   getAllInterest

@@ -17,13 +17,24 @@ export const  createInterest = async(req, res, next) => {
   }
 };
 
-export const  getAllInterest = (req, res ) => {
- Interest.find({}).then((interests)=> {
-  return res.json({
-     status: 'success',
-     data: interests
-   }).status(200)
- })
+export const  getAllInterest = async(req, res, next) => {
+  try {
+    if(!req.query.name){
+      const interest = await Interest.find();
+        return res.json({
+           status: 'success',
+           data: interest
+         }).status(200)
+    }
+    const interest = await Interest.find({ "name": { $regex: `.*${req.query.name}` }});
+      return res.json({
+         status: 'success',
+         data: interest
+       }).status(200)
+  } catch (error) {
+    console.error(`Error fetching interest:: ${error.message}`)
+    next(error)
+  }
 }
 
 export const  interest = async (req, res, next) => {
@@ -33,7 +44,7 @@ export const  interest = async (req, res, next) => {
       if(interest){
         await Interest.deleteOne({ _id: interestId });
           return res.json({
-            status: 'error',
+            status: 'success',
             message: 'Successfully delete interests.'
           }).status(200);
       };

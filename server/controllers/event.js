@@ -57,7 +57,7 @@ export const deleteEvent = async (req, res, next) => {
         if (event) {
             await Event.deleteOne({ _id: eventId });
             return res.json({
-                status: 'error',
+                status: 'success',
                 message: 'Successfully delete interests.'
             }).status(200);
         };
